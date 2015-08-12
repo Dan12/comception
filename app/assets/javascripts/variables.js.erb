@@ -10,7 +10,37 @@ lOnImg.src = "<%=image_path("ledon.jpg")%>";
 lOffImg = new Image();
 lOffImg.src = "<%=image_path("ledoff.jpg")%>";
 
+objArr = [
+    andImg,
+    sOffImg,
+    lOffImg
+];
+
+moveImg = new Image();
+moveImg.src = "<%=image_path("move.jpg")%>";
+pointImg = new Image();
+pointImg.src = "<%=image_path("point.jpg")%>";
+connectImg = new Image();
+connectImg.src = "<%=image_path("connect.jpg")%>";
+
+toolArr = [
+    pointImg,
+    connectImg,
+    moveImg
+];
+
+placedArr = [];
+
 //general
 imgWidth = 40;
 imgHeight = 40;
-mode = 1;
+mode = 0;
+canvElem = null;
+canvas = null;
+selectItem = null;
+canvWidth = 500;
+canvHeight = 500;
+toolBarPadding = 4;
+moving = false;
+prevX = -1;
+prevY = -1;

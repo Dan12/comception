@@ -16,3 +16,5 @@
 //= require_tree .
 //= require variables
 //= require script
+//= require toolbar
+//= require placed
