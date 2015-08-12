@@ -8,8 +8,10 @@ $(document).ready(function(){
    
    $(window).resize();
    
-   canvas.fillStyle = "Blue"
-   canvas.fillRect(100,100,100,100);
+   canvas.fillStyle = "Black";
+   lOnImg.onload = function(){
+      canvas.drawImage(lOnImg, 0, 0, imgWidth, imgHeight);
+   }
 });
 
 function reformat(){
