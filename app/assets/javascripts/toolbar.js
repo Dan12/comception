@@ -3,7 +3,7 @@ function initToolBar(){
     $("#canvas").mousedown(function(e){
         var mouseX = e.pageX - $("#canvas").offset().left;
         var mouseY = e.pageY - $("#canvas").offset().top; 
-        if(mouseX > canvWidth-imgWidth-toolBarPadding && mode){
+        if(mouseX > canvWidth-imgWidth-toolBarPadding){
             var objNum = Math.floor((mouseY-toolBarPadding)/(imgHeight+toolBarPadding));
             if(objNum < objArr.length)
                 selectItem = {"img":objArr[objNum],"offX":(canvWidth-imgWidth-toolBarPadding-mouseX),"offY":((imgHeight+toolBarPadding)*objNum+toolBarPadding-mouseY),"x":canvWidth-imgWidth-toolBarPadding,"y":imgWidth*objNum+toolBarPadding*(objNum+1),"ind":-1};
