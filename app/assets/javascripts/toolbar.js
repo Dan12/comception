@@ -24,7 +24,7 @@ function initToolBar(){
         }
         else if(mode == 0){
             for(var i = 0; i < placedArr.length; i++){
-                if(mouseX >= placedArr[i].x && mouseX <= placedArr[i].x+imgWidth && mouseY >= placedArr[i].y && mouseY <= placedArr[i].y+imgHeight){
+                if(inPlaced(mouseX, mouseY, i)){
                     selectItem = placedArr[i];
                     selectItem.offX = selectItem.x-mouseX;
                     selectItem.offY = selectItem.y-mouseY;
@@ -45,8 +45,10 @@ function initToolBar(){
             moved = true;
             redrawCanvas();
         }
-        else if(mode == 1)
+        else if(mode == 1){
+            redrawCanvas();
             placedHighLight(mouseX,mouseY);
+        }
         else if(mode == 2){
             if(prevX != -1){
                 placedArr.forEach(function(obj, ind, arr){
