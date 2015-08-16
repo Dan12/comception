@@ -5,8 +5,12 @@ function initToolBar(){
         var mouseY = e.pageY - $("#canvas").offset().top; 
         if(mouseX > canvWidth-imgWidth-toolBarPadding && mode == 0){
             var objNum = Math.floor((mouseY-toolBarPadding)/(imgHeight+toolBarPadding));
-            if(objNum < objArr.length)
-                selectItem = {"img":objArr[objNum],"offX":(canvWidth-imgWidth-toolBarPadding-mouseX),"offY":((imgHeight+toolBarPadding)*objNum+toolBarPadding-mouseY),"x":canvWidth-imgWidth-toolBarPadding,"y":imgWidth*objNum+toolBarPadding*(objNum+1),"type":objNum,"new":true,"state":0};
+            if(objNum < objArr.length){
+                var state = -1;
+                if(objNum == 1)
+                    state = 0;
+                selectItem = {"img":objArr[objNum],"offX":(canvWidth-imgWidth-toolBarPadding-mouseX),"offY":((imgHeight+toolBarPadding)*objNum+toolBarPadding-mouseY),"x":canvWidth-imgWidth-toolBarPadding,"y":imgWidth*objNum+toolBarPadding*(objNum+1),"type":objNum,"new":true,"state":state,"id":addNewId(),"iObj":$.extend(true, {}, itemObj[objArr[objNum].iType-1])};
+            }
         }
         else if(mouseY > canvHeight-imgHeight-toolBarPadding){
             var toolNum = Math.floor((mouseX-toolBarPadding)/(imgWidth+toolBarPadding));
@@ -20,7 +24,7 @@ function initToolBar(){
             prevY = mouseY;
         }
         else if(mode == 1){
-            
+            placedConnection(mouseX,mouseY);
         }
         else if(mode == 0){
             for(var i = 0; i < placedArr.length; i++){
@@ -46,6 +50,7 @@ function initToolBar(){
             redrawCanvas();
         }
         else if(mode == 1){
+            moveSelect(mouseX,mouseY);
             redrawCanvas();
             placedHighLight(mouseX,mouseY);
         }
@@ -64,21 +69,19 @@ function initToolBar(){
     
     $("#canvas").mouseup(function(e){
         if(selectItem != null){
-            if(!moved){
+            if(!moved && selectItem.type == 1){
                 if(selectItem.state == 0){
                     selectItem.state = 1;
-                    if(selectItem.type == SWITCHTYPE)
-                        selectItem.img = sOnImg;
+                    selectItem.img = sOnImg;
                 }
                 else{
                     selectItem.state = 0;
-                    if(selectItem.type == SWITCHTYPE)
-                        selectItem.img = sOffImg;
+                    selectItem.img = sOffImg;
                 }
                 redrawCanvas();
             }
             if(selectItem.new)
-                placedArr.push({"img":selectItem.img,"x":selectItem.x+selectItem.offX,"y":selectItem.y+selectItem.offY,"offX":0,"offY":0,"type":selectItem.type,"new":false,"state":selectItem.state});
+                placedArr.push({"img":selectItem.img,"x":selectItem.x+selectItem.offX,"y":selectItem.y+selectItem.offY,"offX":0,"offY":0,"type":selectItem.type,"new":false,"state":selectItem.state,"id":selectItem.id,"iObj":selectItem.iObj});
             else{
                 selectItem.x = selectItem.x+selectItem.offX;
                 selectItem.offX = 0;

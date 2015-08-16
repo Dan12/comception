@@ -47,11 +47,42 @@ prevX = -1;
 prevY = -1;
 moved = true;
 
-LEDTYPE = 2;
-SWITCHTYPE = 1;
-
 andImg.hType = 1;
 sOffImg.hType = 2;
 sOnImg.hType = 2;
 lOffImg.hType = 2;
 lOnImg.hType = 2;
+
+andImg.iType = 1;
+sOffImg.iType = 2;
+sOnImg.iType = 2;
+lOffImg.iType = 3;
+lOnImg.iType = 3;
+
+LEDTYPE = 3;
+SWITCHTYPE = 2;
+
+itemObj = [
+    {"in1":-1,"in2":-1,"in1con":false,"in2con":false},
+    null,
+    {"in1":-1,"in1con":false}
+    ];
+
+creatingNode = false;
+
+selectNode = null;
+
+id = 1;
+
+function addNewId(){
+    var temp = id;
+    id++;
+    return temp;
+}
+
+nodeId = 1;
+function newNodeId(){
+    var temp = id;
+    id++;
+    return temp;
+}
